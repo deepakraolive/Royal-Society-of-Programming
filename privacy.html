@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Royal Society of Programming</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: { harvard: { 500: '#A51C30', 600: '#8c1515', 700: '#731010', 800: '#4A0808' }, gold: { 400: '#E5C158', 500: '#C6A15B', 600: '#A6823F' }, charcoal: { 800: '#1A1A1A', 900: '#111111' } }
+                }
+            }
+        }
+    </script>
+    <style>body { background-color: #0a0a0a; }</style>
+</head>
+<body class="font-sans antialiased text-white selection:bg-harvard-600 selection:text-white flex flex-col min-h-screen">
+    
+    <!-- Header -->
+    <header class="w-full p-8 flex justify-between items-center bg-[#020202] border-b border-gray-800">
+        <a href="index.html" class="flex items-center">
+            <img src="./LOGO.png" alt="Royal Society of Programming" class="h-12 md:h-16 w-auto object-contain rounded-xl shadow-2xl hover:scale-105 transition-transform duration-300">
+        </a>
+        <nav class="hidden md:flex gap-8 text-sm font-semibold tracking-wider uppercase text-gray-300">
+            <a href="index.html" class="hover:text-harvard-600 transition-colors">Home</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-16 text-gray-300 w-full animate-fade-in-up">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Privacy Policy</h1>
+        <p class="text-sm text-gray-500 mb-12 uppercase tracking-widest font-bold">Last updated: March 2026</p>
+
+        <div class="space-y-10">
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">1. Data We Collect</h2>
+                <p class="leading-relaxed">When you use the Royal Society of Programming platform, we collect information you provide directly to us. This includes your email address and password for account creation, and educational data you choose to share — including assignments, learning progress, dates, and optional profile descriptions. We do not collect sensitive financial information such as bank account numbers or credit card details directly.</p>
+            </section>
+            
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">2. How We Use Your Data</h2>
+                <p class="leading-relaxed">We use the data you provide to operate and improve our educational courses. Your academic information is processed to generate learning summaries, progress charts, and insights about your performance in Artificial Intelligence concepts. We may use aggregated, anonymized data for analytical purposes to understand usage trends and improve the Royal Society of Programming's features.</p>
+            </section>
+            
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">3. Data Storage & Security</h2>
+                <p class="leading-relaxed">Your data is stored securely on our servers with industry-standard encryption and access controls. We implement reasonable technical and organizational measures to protect your personal information from unauthorized access, alteration, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+            </section>
+            
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">4. Third Party Services</h2>
+                <p class="leading-relaxed">The Royal Society of Programming does not sell, trade, or rent your personal data to third parties. We may use trusted service providers for hosting, analytics, or email delivery — these partners are contractually obligated to protect your data and use it only for the services they provide to us.</p>
+            </section>
+            
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">5. Your Rights</h2>
+                <p class="leading-relaxed">You have the right to access, correct, or delete your personal data at any time. You can export all your academic data and certificates from your account settings. If you choose to delete your account, all associated data will be permanently removed from our systems within 30 days.</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">6. Changes to This Policy</h2>
+                <p class="leading-relaxed">We may update this Privacy Policy from time to time. When we do, we will notify you of any material changes by posting the updated policy on this page and updating the "Last updated" date. We encourage you to review this policy periodically.</p>
+            </section>
+            
+            <section>
+                <h2 class="text-xl font-bold text-white mb-3">7. Contact Us</h2>
+                <p class="leading-relaxed">If you have any questions about this Privacy Policy or our data practices, please contact us at privacy@royalsocietyofprogramming.com.</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#020202] py-10 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div class="flex items-center gap-4 opacity-80">
+                <img src="./LOGO.png" alt="RSP Logo" class="h-8 w-auto object-contain drop-shadow-md">
+                <span class="text-gray-500 text-xs tracking-wider uppercase font-semibold">&copy; 2026 Royal Society of Programming.</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-8 text-xs font-bold text-gray-500 tracking-widest uppercase">
+                <a href="#" class="hover:text-gold-400 transition-colors">Accessibility</a>
+                <a href="privacy.html" class="text-white hover:text-gold-400 transition-colors">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-gold-400 transition-colors">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
