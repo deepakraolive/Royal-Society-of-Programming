@@ -13,18 +13,117 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: { harvard: { 500: '#A51C30', 600: '#8c1515', 700: '#731010', 800: '#4A0808' }, gold: { 400: '#E5C158', 500: '#C6A15B', 600: '#A6823F' }, charcoal: { 800: '#1A1A1A', 900: '#111111' } }
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        harvard: {
+                            500: '#A51C30',
+                            600: '#8c1515',
+                            700: '#731010',
+                            800: '#4A0808'
+                        },
+                        gold: {
+                            400: '#E5C158',
+                            500: '#C6A15B',
+                            600: '#A6823F'
+                        },
+                        charcoal: {
+                            800: '#1A1A1A',
+                            900: '#111111'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0 rgba(165, 28, 48, 0.4)' },
+                            '50%': { opacity: '.8', boxShadow: '0 0 0 15px rgba(165, 28, 48, 0)' },
+                        }
+                    }
                 }
             }
         }
     </script>
-    <style>body { background-color: #0a0a0a; }</style>
+
+    <style>
+        body { background-color: #111111; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-dark {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-bg {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
+            overflow: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #8c1515, #A51C30);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .curr-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .curr-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            border-color: rgba(198, 161, 91, 0.4);
+        }
+        
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 100ms; opacity: 0; }
+        .delay-200 { animation-delay: 200ms; opacity: 0; }
+        .delay-300 { animation-delay: 300ms; opacity: 0; }
+        .delay-400 { animation-delay: 400ms; opacity: 0; }
+
+        /* Custom Scrollbar for Instructor Bio */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(165, 28, 48, 0.5);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(165, 28, 48, 0.8);
+        }
+    </style>
+
 </head>
 <body class="font-sans antialiased text-white selection:bg-harvard-600 selection:text-white flex flex-col min-h-screen">
     
     <!-- Header -->
-    <header class="w-full p-8 flex justify-between items-center bg-[#020202] border-b border-gray-800">
+    <header class="absolute top-0 left-0 w-full p-8 flex justify-between items-center z-20">
         <a href="index.html" class="flex items-center">
             <img src="./LOGO.png" alt="Royal Society of Programming" class="h-12 md:h-16 w-auto object-contain rounded-xl shadow-2xl hover:scale-105 transition-transform duration-300">
         </a>
@@ -33,10 +132,18 @@
         </nav>
     </header>
 
+    <!-- Page Header -->
+    <section class="relative hero-bg py-32 border-b border-gray-800 overflow-hidden">
+        <canvas id="neural-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-60"></canvas>
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center animate-fade-in-up">
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6">Privacy <span class="gradient-text">Policy</span></h1>
+            <p class="text-sm text-gray-500 uppercase tracking-widest font-bold">Last updated: March 2026</p>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <main class="flex-grow max-w-4xl mx-auto px-6 py-16 text-gray-300 w-full animate-fade-in-up">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Privacy Policy</h1>
-        <p class="text-sm text-gray-500 mb-12 uppercase tracking-widest font-bold">Last updated: March 2026</p>
+        
 
         <div class="space-y-10">
             <section>
@@ -90,5 +197,85 @@
             </div>
         </div>
     </footer>
+
+    <!-- Neural Network Animation Script -->
+    <script>
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        function resize() {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+        }
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.isGold = Math.random() > 0.7;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.isGold ? 'rgba(198, 161, 91, 0.8)' : 'rgba(165, 28, 48, 0.8)';
+                ctx.fill();
+            }
+        }
+        
+        function init() {
+            window.addEventListener('resize', resize);
+            resize();
+            
+            const numParticles = Math.min(Math.floor(width * height / 12000), 120);
+            for(let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height);
+            
+            for(let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for(let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 180) {
+                        ctx.beginPath();
+                        const opacity = 0.15 * (1 - dist/180);
+                        const isBothGold = particles[i].isGold && particles[j].isGold;
+                        ctx.strokeStyle = isBothGold ? `rgba(198, 161, 91, ${opacity})` : `rgba(165, 28, 48, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        init();
+    </script>
 </body>
 </html>
