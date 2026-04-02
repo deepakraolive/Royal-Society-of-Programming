@@ -198,7 +198,8 @@
     <!-- ==============================================
          INSTRUCTOR SECTION
          ============================================== -->
-    <section id="instructor" class="py-24 px-4 sm:px-8 lg:px-16 bg-charcoal-900 relative border-t border-gray-800 flex justify-center w-full">
+    <section id="instructor" class="py-24 px-4 sm:px-8 lg:px-16 bg-charcoal-900 relative border-t border-gray-800 flex justify-center w-full overflow-hidden">
+        <canvas id="instructor-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-30"></canvas>
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/10 rounded-full blur-[80px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-harvard-600/15 rounded-full blur-[80px] pointer-events-none"></div>
 
@@ -273,6 +274,9 @@
          RSP COMMUNITY SECTION
          ============================================== -->
     <section id="community" class="py-24 px-4 sm:px-8 lg:px-16 bg-[#0a0a0a] relative border-t border-gray-800 flex justify-center w-full overflow-hidden">
+        <!-- Animated Python Code Canvas Background -->
+        <canvas class="python-snake-canvas absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-30"></canvas>
+        
         <!-- Background Accents -->
         <div class="absolute top-1/2 left-0 w-[400px] h-[400px] bg-harvard-600/10 rounded-full blur-[80px] pointer-events-none transform -translate-y-1/2"></div>
         <div class="absolute top-1/2 right-0 w-[400px] h-[400px] bg-gold-400/10 rounded-full blur-[80px] pointer-events-none transform -translate-y-1/2"></div>
@@ -337,6 +341,8 @@
          ============================================== -->
     <section id="curriculum" class="bg-charcoal-900 py-24 px-4 sm:px-8 lg:px-16 text-white relative border-t-8 border-harvard-600 overflow-hidden">
         
+        <canvas id="curriculum-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-30"></canvas>
+
         <!-- Abstract Background shapes -->
         <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-harvard-600/10 rounded-full blur-[100px] mix-blend-screen pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-400/5 rounded-full blur-[100px] mix-blend-screen pointer-events-none"></div>
@@ -609,8 +615,10 @@
     <!-- ==============================================
          FOOTER
          ============================================== -->
-    <footer class="bg-[#020202] py-10 border-t border-gray-800 relative z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+    <footer class="bg-[#0a0a0a] py-10 border-t border-gray-800 relative z-20 overflow-hidden">
+        <!-- Footer Canvas Background -->
+        <canvas id="footer-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-40"></canvas>
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left relative z-10">
             <div class="flex items-center gap-4 opacity-80">
                 <img src="./LOGO.png" alt="RSP Logo" class="h-8 w-auto object-contain drop-shadow-md">
                 <span class="text-gray-500 text-xs tracking-wider uppercase font-semibold">&copy; 2026 Royal Society of Programming.</span>
@@ -642,7 +650,7 @@
                 this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.8;
                 this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 1.5 + 0.5;
+                this.radius = Math.random() * 4 + 2; // Big glowing balls
                 this.isGold = Math.random() > 0.7;
             }
             
@@ -701,6 +709,315 @@
         }
         
         init();
+    </script>
+
+    <!-- Python Snake Animation Script -->
+    <script>
+        class SnakeAnimation {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.snakes = [];
+                this.width = 0;
+                this.height = 0;
+
+                this.resize = this.resize.bind(this);
+                this.animate = this.animate.bind(this);
+
+                window.addEventListener('resize', this.resize);
+                this.resize();
+                this.animate();
+            }
+
+            createSnake() {
+                const s = {
+                    segments: [],
+                    length: Math.floor(Math.random() * 40) + 40,
+                    x: Math.random() * this.width,
+                    y: Math.random() * this.height,
+                    angle: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 1.5 + 1,
+                    turnSpeed: (Math.random() - 0.5) * 0.1,
+                    isGold: Math.random() > 0.5
+                };
+                for(let i=0; i<s.length; i++) {
+                    s.segments.push({x: s.x, y: s.y});
+                }
+                return s;
+            }
+
+            updateSnake(s) {
+                s.turnSpeed += (Math.random() - 0.5) * 0.05;
+                s.turnSpeed = Math.max(-0.1, Math.min(0.1, s.turnSpeed));
+                
+                s.angle += s.turnSpeed;
+                
+                s.x += Math.cos(s.angle) * s.speed;
+                s.y += Math.sin(s.angle) * s.speed;
+                
+                if (s.x < 10 || s.x > this.width - 10) {
+                    s.angle = Math.PI - s.angle;
+                    s.x = Math.max(10, Math.min(this.width - 10, s.x));
+                }
+                if (s.y < 10 || s.y > this.height - 10) {
+                    s.angle = -s.angle;
+                    s.y = Math.max(10, Math.min(this.height - 10, s.y));
+                }
+
+                s.segments.unshift({x: s.x, y: s.y});
+                if (s.segments.length > s.length) {
+                    s.segments.pop();
+                }
+            }
+
+            drawSnake(s) {
+                this.ctx.beginPath();
+                for(let i=0; i<s.segments.length; i++) {
+                    const pt = s.segments[i];
+                    if(i === 0) {
+                        this.ctx.moveTo(pt.x, pt.y);
+                    } else {
+                        this.ctx.lineTo(pt.x, pt.y);
+                    }
+                }
+                
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+                
+                if (s.segments.length > 1) {
+                    const tail = s.segments[s.segments.length - 1];
+                    const head = s.segments[0];
+                    const gradient = this.ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
+                    
+                    if (s.isGold) {
+                        gradient.addColorStop(0, 'rgba(198, 161, 91, 0)');
+                        gradient.addColorStop(1, 'rgba(198, 161, 91, 0.4)');
+                    } else {
+                        gradient.addColorStop(0, 'rgba(165, 28, 48, 0)');
+                        gradient.addColorStop(1, 'rgba(165, 28, 48, 0.4)');
+                    }
+                    
+                    this.ctx.strokeStyle = gradient;
+                    this.ctx.lineWidth = 5;
+                    this.ctx.stroke();
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(head.x, head.y, 4, 0, Math.PI * 2);
+                    this.ctx.fillStyle = s.isGold ? '#E5C158' : '#A51C30';
+                    this.ctx.fill();
+                    
+                    this.ctx.fillStyle = '#111';
+                    const eyeOffsetX = Math.cos(s.angle + Math.PI/2) * 2;
+                    const eyeOffsetY = Math.sin(s.angle + Math.PI/2) * 2;
+                    this.ctx.beginPath();
+                    this.ctx.arc(head.x + eyeOffsetX, head.y + eyeOffsetY, 1.5, 0, Math.PI*2);
+                    this.ctx.arc(head.x - eyeOffsetX, head.y - eyeOffsetY, 1.5, 0, Math.PI*2);
+                    this.ctx.fill();
+                }
+            }
+
+            resize() {
+                this.width = this.canvas.width = this.canvas.offsetWidth;
+                this.height = this.canvas.height = Math.max(this.canvas.offsetHeight, 600);
+                
+                this.snakes = [];
+                const numSnakes = Math.min(Math.floor(this.width / 200) + 2, 7);
+                for(let i=0; i<numSnakes; i++) {
+                    this.snakes.push(this.createSnake());
+                }
+            }
+            
+            animate() {
+                requestAnimationFrame(this.animate);
+                this.ctx.clearRect(0, 0, this.width, this.height);
+                
+                for(let i=0; i<this.snakes.length; i++) {
+                    this.updateSnake(this.snakes[i]);
+                    this.drawSnake(this.snakes[i]);
+                }
+            }
+        }
+
+        // Initialize animations on all elements with the 'python-snake-canvas' class
+        document.querySelectorAll('.python-snake-canvas').forEach(canvas => {
+            new SnakeAnimation(canvas);
+        });
+    </script>
+
+    <!-- Instructor Animation Script (Floating Geometric Particles) -->
+    <script>
+        const instCanvas = document.getElementById('instructor-canvas');
+        if (instCanvas) {
+            const instCtx = instCanvas.getContext('2d');
+            let instWidth, instHeight;
+            let instParticles = [];
+
+            function resizeInstCanvas() {
+                instWidth = instCanvas.width = instCanvas.offsetWidth;
+                instHeight = instCanvas.height = Math.max(instCanvas.offsetHeight, 500);
+                instParticles = [];
+                const num = Math.floor(instWidth / 40);
+                for(let i=0; i<num; i++) {
+                    instParticles.push({
+                        x: Math.random() * instWidth,
+                        y: Math.random() * instHeight,
+                        size: Math.random() * 8 + 2,
+                        speedY: (Math.random() - 0.5) * 0.5 - 0.2,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        opacity: Math.random() * 0.5 + 0.1,
+                        isGold: Math.random() > 0.5
+                    });
+                }
+            }
+
+            function animateInstCanvas() {
+                requestAnimationFrame(animateInstCanvas);
+                instCtx.clearRect(0, 0, instWidth, instHeight);
+                for(let i=0; i<instParticles.length; i++) {
+                    let p = instParticles[i];
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    if(p.y < -20) p.y = instHeight + 20;
+                    if(p.y > instHeight + 20) p.y = -20;
+                    if(p.x < -20) p.x = instWidth + 20;
+                    if(p.x > instWidth + 20) p.x = -20;
+
+                    instCtx.beginPath();
+                    instCtx.rect(p.x, p.y, p.size, p.size);
+                    instCtx.fillStyle = p.isGold ? `rgba(198, 161, 91, ${p.opacity})` : `rgba(165, 28, 48, ${p.opacity})`;
+                    instCtx.fill();
+                }
+            }
+            window.addEventListener('resize', resizeInstCanvas);
+            resizeInstCanvas();
+            animateInstCanvas();
+        }
+    </script>
+
+    <!-- Curriculum Animation Script (Python Code Rain) -->
+    <script>
+        const currCanvas = document.getElementById('curriculum-canvas');
+        if (currCanvas) {
+            const currCtx = currCanvas.getContext('2d');
+            let currWidth, currHeight;
+            let currColumns = [];
+            
+            const pySnippets = [
+                'import ai', 'def train():', 'class Model:', 'model.fit(X)',
+                'import pandas', 'df.dropna()', 'return acc', 'Loss = MSE',
+                'epoch += 1', 'np.zeros()', 'self.weights', 'optimizer.step()'
+            ];
+
+            function resizeCurrCanvas() {
+                currWidth = currCanvas.width = currCanvas.offsetWidth;
+                currHeight = currCanvas.height = Math.max(currCanvas.offsetHeight, 600);
+                
+                const columnCount = Math.floor(currWidth / 120);
+                currColumns = [];
+                for(let i = 0; i < columnCount; i++) {
+                    currColumns[i] = {
+                        x: i * 120,
+                        y: Math.random() * currHeight,
+                        speed: Math.random() * 1.0 + 0.3,
+                        snippet: pySnippets[Math.floor(Math.random() * pySnippets.length)],
+                        opacity: Math.random() * 0.4 + 0.1
+                    };
+                }
+            }
+            
+            function animateCurrCanvas() {
+                requestAnimationFrame(animateCurrCanvas);
+                currCtx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                currCtx.fillRect(0, 0, currWidth, currHeight);
+                currCtx.font = '12px "Plus Jakarta Sans"';
+                currCtx.textAlign = 'center';
+                
+                for(let i = 0; i < currColumns.length; i++) {
+                    const col = currColumns[i];
+                    currCtx.fillStyle = (i % 3 === 0) ? `rgba(198, 161, 91, ${col.opacity})` : `rgba(165, 28, 48, ${col.opacity})`;
+                    currCtx.fillText(col.snippet, col.x + 60, col.y);
+                    col.y += col.speed;
+                    
+                    if(col.y > currHeight && Math.random() > 0.98){
+                        col.y = -20;
+                        col.snippet = pySnippets[Math.floor(Math.random() * pySnippets.length)];
+                        col.speed = Math.random() * 1.0 + 0.3;
+                    }
+                }
+            }
+            window.addEventListener('resize', resizeCurrCanvas);
+            resizeCurrCanvas();
+            animateCurrCanvas();
+        }
+    </script>
+
+    <!-- Footer Animation Script (Data Flow) -->
+    <script>
+        const footerCanvas = document.getElementById('footer-canvas');
+        if (footerCanvas) {
+            const footerCtx = footerCanvas.getContext('2d');
+            let footerWidth, footerHeight;
+            let dataStreams = [];
+
+            function resizeFooterCanvas() {
+                footerWidth = footerCanvas.width = footerCanvas.offsetWidth;
+                footerHeight = footerCanvas.height = footerCanvas.offsetHeight;
+                dataStreams = [];
+                const streamCount = Math.floor(footerHeight / 15);
+                for(let i=0; i<streamCount; i++) {
+                    dataStreams.push({
+                        y: i * 15 + Math.random() * 10,
+                        x: Math.random() * footerWidth,
+                        speed: Math.random() * 0.5 + 0.1,
+                        length: Math.random() * 100 + 50,
+                        isGold: Math.random() > 0.6,
+                        opacity: Math.random() * 0.5 + 0.1
+                    });
+                }
+            }
+
+            function animateFooterCanvas() {
+                requestAnimationFrame(animateFooterCanvas);
+                footerCtx.clearRect(0, 0, footerWidth, footerHeight);
+
+                for(let i=0; i<dataStreams.length; i++) {
+                    let stream = dataStreams[i];
+                    stream.x += stream.speed;
+
+                    let gradient = footerCtx.createLinearGradient(stream.x - stream.length, stream.y, stream.x, stream.y);
+                    if (stream.isGold) {
+                        gradient.addColorStop(0, 'rgba(198, 161, 91, 0)');
+                        gradient.addColorStop(1, `rgba(198, 161, 91, ${stream.opacity})`);
+                    } else {
+                        gradient.addColorStop(0, 'rgba(165, 28, 48, 0)');
+                        gradient.addColorStop(1, `rgba(165, 28, 48, ${stream.opacity})`);
+                    }
+
+                    footerCtx.beginPath();
+                    footerCtx.moveTo(stream.x - stream.length, stream.y);
+                    footerCtx.lineTo(stream.x, stream.y);
+                    footerCtx.strokeStyle = gradient;
+                    footerCtx.lineWidth = 3; // Thicker lines
+                    footerCtx.stroke();
+
+                    // Glow tip
+                    footerCtx.beginPath();
+                    footerCtx.arc(stream.x, stream.y, 4, 0, Math.PI * 2); // Bigger tip
+                    footerCtx.fillStyle = stream.isGold ? `rgba(198, 161, 91, ${stream.opacity + 0.3})` : `rgba(165, 28, 48, ${stream.opacity + 0.3})`;
+                    footerCtx.fill();
+
+                    if(stream.x - stream.length > footerWidth) {
+                        stream.x = -10;
+                        stream.y = Math.random() * footerHeight;
+                        stream.speed = Math.random() * 0.5 + 0.1;
+                    }
+                }
+            }
+
+            window.addEventListener('resize', resizeFooterCanvas);
+            resizeFooterCanvas();
+            animateFooterCanvas();
+        }
     </script>
 </body>
 </html>

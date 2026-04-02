@@ -154,6 +154,9 @@
 
     <!-- Detailed Curriculum Content -->
         <main class="flex-grow relative bg-charcoal-900 w-full overflow-hidden border-t border-gray-800">
+        <!-- Animated Background Canvas -->
+        <canvas id="curriculum-main-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-30"></canvas>
+        
         <!-- Abstract Background shapes -->
         <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-harvard-600/10 rounded-full blur-[100px] mix-blend-screen pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-400/5 rounded-full blur-[100px] mix-blend-screen pointer-events-none"></div>
@@ -284,8 +287,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#020202] py-10 border-t border-gray-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+    <footer class="bg-[#0a0a0a] py-10 border-t border-gray-800 mt-auto relative z-20 overflow-hidden">
+        <!-- Footer Canvas Background -->
+        <canvas id="footer-canvas" class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none opacity-40"></canvas>
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left relative z-10">
             <div class="flex items-center gap-4 opacity-80">
                 <img src="./LOGO.png" alt="RSP Logo" class="h-8 w-auto object-contain drop-shadow-md">
                 <span class="text-gray-500 text-xs tracking-wider uppercase font-semibold">&copy; 2026 Royal Society of Programming.</span>
@@ -317,7 +322,7 @@
                 this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.8;
                 this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 1.5 + 0.5;
+                this.radius = Math.random() * 4 + 2;
                 this.isGold = Math.random() > 0.7;
             }
             
@@ -376,6 +381,132 @@
         }
         
         init();
+    </script>
+
+    <!-- Curriculum Main Animation Script (Python Code Rain) -->
+    <script>
+        const currCanvas = document.getElementById('curriculum-main-canvas');
+        if (currCanvas) {
+            const currCtx = currCanvas.getContext('2d');
+            let currWidth, currHeight;
+            let currColumns = [];
+            
+            const pySnippets = [
+                'import ai', 'def train():', 'class Model:', 'model.fit(X)',
+                'import pandas', 'df.dropna()', 'return acc', 'Loss = MSE',
+                'epoch += 1', 'np.zeros()', 'self.weights', 'optimizer.step()'
+            ];
+
+            function resizeCurrCanvas() {
+                currWidth = currCanvas.width = currCanvas.offsetWidth;
+                currHeight = currCanvas.height = Math.max(currCanvas.offsetHeight, 600);
+                
+                const columnCount = Math.floor(currWidth / 120);
+                currColumns = [];
+                for(let i = 0; i < columnCount; i++) {
+                    currColumns[i] = {
+                        x: i * 120,
+                        y: Math.random() * currHeight,
+                        speed: Math.random() * 1.0 + 0.3,
+                        snippet: pySnippets[Math.floor(Math.random() * pySnippets.length)],
+                        opacity: Math.random() * 0.4 + 0.1
+                    };
+                }
+            }
+            
+            function animateCurrCanvas() {
+                requestAnimationFrame(animateCurrCanvas);
+                currCtx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                currCtx.fillRect(0, 0, currWidth, currHeight);
+                currCtx.font = '12px "Plus Jakarta Sans"';
+                currCtx.textAlign = 'center';
+                
+                for(let i = 0; i < currColumns.length; i++) {
+                    const col = currColumns[i];
+                    currCtx.fillStyle = (i % 3 === 0) ? `rgba(198, 161, 91, ${col.opacity})` : `rgba(165, 28, 48, ${col.opacity})`;
+                    currCtx.fillText(col.snippet, col.x + 60, col.y);
+                    col.y += col.speed;
+                    
+                    if(col.y > currHeight && Math.random() > 0.98){
+                        col.y = -20;
+                        col.snippet = pySnippets[Math.floor(Math.random() * pySnippets.length)];
+                        col.speed = Math.random() * 1.0 + 0.3;
+                    }
+                }
+            }
+            window.addEventListener('resize', resizeCurrCanvas);
+            resizeCurrCanvas();
+            animateCurrCanvas();
+        }
+    </script>
+
+    <!-- Footer Animation Script (Data Flow) -->
+    <script>
+        const footerCanvas = document.getElementById('footer-canvas');
+        if (footerCanvas) {
+            const footerCtx = footerCanvas.getContext('2d');
+            let footerWidth, footerHeight;
+            let dataStreams = [];
+
+            function resizeFooterCanvas() {
+                footerWidth = footerCanvas.width = footerCanvas.offsetWidth;
+                footerHeight = footerCanvas.height = footerCanvas.offsetHeight;
+                dataStreams = [];
+                const streamCount = Math.floor(footerHeight / 15);
+                for(let i=0; i<streamCount; i++) {
+                    dataStreams.push({
+                        y: i * 15 + Math.random() * 10,
+                        x: Math.random() * footerWidth,
+                        speed: Math.random() * 0.5 + 0.1,
+                        length: Math.random() * 100 + 50,
+                        isGold: Math.random() > 0.6,
+                        opacity: Math.random() * 0.5 + 0.1
+                    });
+                }
+            }
+
+            function animateFooterCanvas() {
+                requestAnimationFrame(animateFooterCanvas);
+                footerCtx.clearRect(0, 0, footerWidth, footerHeight);
+
+                for(let i=0; i<dataStreams.length; i++) {
+                    let stream = dataStreams[i];
+                    stream.x += stream.speed;
+
+                    let gradient = footerCtx.createLinearGradient(stream.x - stream.length, stream.y, stream.x, stream.y);
+                    if (stream.isGold) {
+                        gradient.addColorStop(0, 'rgba(198, 161, 91, 0)');
+                        gradient.addColorStop(1, `rgba(198, 161, 91, ${stream.opacity})`);
+                    } else {
+                        gradient.addColorStop(0, 'rgba(165, 28, 48, 0)');
+                        gradient.addColorStop(1, `rgba(165, 28, 48, ${stream.opacity})`);
+                    }
+
+                    footerCtx.beginPath();
+                    footerCtx.moveTo(stream.x - stream.length, stream.y);
+                    footerCtx.lineTo(stream.x, stream.y);
+                    footerCtx.strokeStyle = gradient;
+                    footerCtx.lineWidth = 3;
+                    footerCtx.stroke();
+
+                    // Glow tip
+                    footerCtx.beginPath();
+                    footerCtx.arc(stream.x, stream.y, 4, 0, Math.PI * 2);
+                    footerCtx.fillStyle = stream.isGold ? `rgba(198, 161, 91, ${stream.opacity + 0.3})` : `rgba(165, 28, 48, ${stream.opacity + 0.3})`;
+                    footerCtx.fill();
+
+                    if(stream.x - stream.length > footerWidth) {
+                        stream.x = -10;
+                        stream.y = Math.random() * footerHeight;
+                        stream.speed = Math.random() * 0.5 + 0.1;
+                    }
+                }
+            }
+
+            window.addEventListener('resize', resizeFooterCanvas);
+            resizeFooterCanvas();
+            animateFooterCanvas();
+        }
     </script>
 </body>
 </html>
