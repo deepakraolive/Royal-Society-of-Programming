@@ -104,9 +104,16 @@
         .delay-300 { animation-delay: 300ms; opacity: 0; }
         .delay-400 { animation-delay: 400ms; opacity: 0; }
 
-        /* Custom Scrollbar for Instructor Bio */
+        /* Custom Scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.05);
@@ -159,11 +166,11 @@
                     <span class="text-4xl sm:text-5xl lg:text-6xl text-gray-300">& Machine Learning</span>
                 </h1>
 
-                <p class="text-xl sm:text-2xl text-gray-300 mb-8 font-light leading-relaxed animate-fade-in-up delay-200 border-l-4 border-gold-500 pl-6">
+                <p class="hidden md:block text-xl sm:text-2xl text-gray-300 mb-8 font-light leading-relaxed animate-fade-in-up delay-200 border-l-4 border-gold-500 pl-6">
                     Master Data Science, AI, and Machine Learning with real-world industry applications perfectly designed for future leaders.
                 </p>
 
-                <p class="text-lg text-gray-400 mb-10 max-w-2xl animate-fade-in-up delay-300">
+                <p class="hidden md:block text-lg text-gray-400 mb-10 max-w-2xl animate-fade-in-up delay-300">
                     A comprehensive program designed to build strong foundations in modern AI, complete with hands-on projects, industry-relevant tools, and expert academic mentorship.
                 </p>
 
@@ -187,7 +194,31 @@
             </div>
             
             <!-- Right Stats Content -->
-            <div class="lg:col-span-4 mt-12 lg:mt-16 sm:flex flex-col gap-4 animate-fade-in-up delay-400 z-10">
+            <div class="lg:col-span-4 mt-12 lg:mt-16 sm:flex flex-col gap-4 animate-fade-in-up delay-400 z-10 pb-10 md:pb-0">
+                
+                <!-- Desktop Progress Tracker -->
+                <div class="hidden md:flex flex-col glass-dark p-6 sm:p-8 rounded-[2rem] border border-gray-700 shadow-2xl relative overflow-hidden group">
+                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4 flex items-center gap-3">
+                        <span class="w-8 h-px bg-harvard-500"></span>
+                        Current Progress
+                    </h3>
+                    <div class="relative pl-4 space-y-6">
+                        <div class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-gray-800"></div>
+                        <div class="relative flex items-center gap-4">
+                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-harvard-500 border-[3px] border-charcoal-900 shadow-[0_0_10px_rgba(165,28,48,0.5)] z-10 transition-transform hover:scale-125 duration-300"></div>
+                            <p class="text-sm font-semibold text-white">Enrollment Open <span class="block text-[10px] text-gray-500 font-normal uppercase tracking-wider">Present Stage</span></p>
+                        </div>
+                        <div class="relative flex items-center gap-4">
+                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-gray-800 border-[3px] border-charcoal-900 z-10 transition-colors duration-300 hover:bg-gold-500"></div>
+                            <p class="text-sm font-semibold text-gray-500">Registration Ends <span class="block text-[10px] text-gray-700 font-normal uppercase tracking-wider">June 2026</span></p>
+                        </div>
+                        <div class="relative flex items-center gap-4">
+                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-gray-800 border-[3px] border-charcoal-900 z-10 transition-colors duration-300 hover:bg-gold-500"></div>
+                            <p class="text-sm font-semibold text-gray-500">Course Commences <span class="block text-[10px] text-gray-700 font-normal uppercase tracking-wider">Summer 2026</span></p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="glass-dark p-6 sm:p-8 rounded-[2rem] border border-gray-700 shadow-2xl relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-gold-400/5 rounded-full blur-[30px] pointer-events-none group-hover:bg-gold-400/10 transition-colors"></div>
                     
@@ -297,10 +328,23 @@
 
                 <div class="w-20 h-1 bg-gold-400 mb-8 rounded-full"></div>
 
-                <div class="text-base text-gray-300 space-y-5 leading-relaxed mb-10 font-light">
+                <div class="hidden md:block text-base text-gray-300 space-y-5 leading-relaxed mb-10 font-light">
                     <p>Anzar Hussain Lone is an Assistant Professor in the Department of Computer Science and Engineering at Lovely Professional University, Punjab. With a strong academic background, he holds a B.Tech and M.Tech in Computer Science and Engineering, having completed his master’s degree from National Institute of Technology (NIT) Srinagar. He is also a two-time GATE qualifier, demonstrating his deep understanding of core computer science concepts.</p>
                     <p>With over three years of teaching experience, he has been actively involved in academic instruction, research, and mentoring. His primary research interests include Artificial Intelligence, Data Science, and Machine Learning applications. Mr. Lone has authored four research papers in the domain of Artificial Intelligence, and is currently guiding 2 masters students and 15 B.Tech students on research and innovation projects.</p>
                     <p>An ardent researcher and educator, he has conducted several workshops and training programs on Artificial Intelligence and Prompt Engineering for students and educators. His academic and professional contributions reflect his commitment to fostering innovation, critical thinking, and applied research in emerging technologies.</p>
+                </div>
+
+                <!-- Mobile Short Bio -->
+                <div class="block md:hidden bg-gradient-to-br from-gray-800 to-charcoal-900 border border-gray-700 rounded-2xl p-6 mb-8 shadow-xl">
+                    <div class="flex gap-3 mb-3 items-center">
+                        <div class="w-8 h-8 rounded-full bg-harvard-600/30 flex items-center justify-center text-harvard-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h4 class="text-white font-bold tracking-wide">Expertise Highlights</h4>
+                    </div>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        M.Tech from NIT Srinagar, 2x GATE Qualifier, with vast experience in Artificial Intelligence, Data Science training, and technical mentorship.
+                    </p>
                 </div>
 
                 <!-- Academic highlights / badges -->
@@ -353,13 +397,18 @@
                 Royal Society of <span class="gradient-text">Programming</span>
             </h2>
             
-            <p class="text-xl text-gray-300 mb-6 font-light max-w-3xl leading-relaxed">
+            <p class="hidden md:block text-xl text-gray-300 mb-6 font-light max-w-3xl leading-relaxed">
                 An elite community of coders, innovators, and tech enthusiasts at LPU. We focus on mastering programming concepts, building real-world projects, collaborating on open-source, and fostering a culture of excellence in computer science.
             </p>
 
-            <div class="text-lg text-gray-400 mb-12 max-w-2xl font-light">
+            <div class="hidden md:block text-lg text-gray-400 mb-12 max-w-2xl font-light">
                 Our goal is to create future-ready developers who think logically, code efficiently, and innovate fearlessly.
             </div>
+
+            <!-- Mobile Community Description -->
+            <p class="block md:hidden text-lg text-gray-300 mb-10 font-light max-w-3xl leading-relaxed px-4">
+                An elite community of tech enthusiasts at LPU mastering modern programming skills. Building future-ready developers who code efficiently and innovate fearlessly.
+            </p>
             
             <!-- Links / Buttons -->
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
@@ -459,10 +508,10 @@
                 </div>
             </div>
 
-            <!-- Curriculum Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            <!-- Curriculum Grid / Mobile Snap Carousel -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:overflow-x-visible md:snap-none md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-20 pb-8 md:pb-0 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">01</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 1:</span> Introduction of AI and Fundamentals Of Python</h4>
@@ -492,7 +541,7 @@
                     </div>
                 </div>
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">02</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 2:</span> Python for Data Science</h4>
@@ -522,7 +571,7 @@
                     </div>
                 </div>
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">03</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 3:</span> Machine Learning Algorithms</h4>
@@ -552,7 +601,7 @@
                     </div>
                 </div>
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">04</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 4:</span> Evaluation Matrix and Ensemble Learning</h4>
@@ -582,7 +631,7 @@
                     </div>
                 </div>
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">05</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 5:</span> Unsupervised Learning</h4>
@@ -612,7 +661,7 @@
                     </div>
                 </div>
 
-                <div class="curr-card glass-dark p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
+                <div class="curr-card min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center md:snap-none glass-dark p-6 md:p-8 rounded-2xl border border-gray-800 group relative flex flex-col h-full overflow-hidden">
                     <div class="absolute top-0 right-0 p-6 text-7xl font-serif text-gray-800/30 group-hover:text-harvard-600/20 transition-colors pointer-events-none select-none">06</div>
                     <div class="relative z-10 flex flex-col h-full">
                         <h4 class="text-xl font-bold text-white mb-3 group-hover:text-gold-400 transition-colors pr-10"><span class="text-gold-400 font-serif mr-1">Week 6:</span> CNN and RNN</h4>
