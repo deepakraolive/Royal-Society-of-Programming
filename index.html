@@ -196,29 +196,6 @@
             <!-- Right Stats Content -->
             <div class="lg:col-span-4 mt-12 lg:mt-16 sm:flex flex-col gap-4 animate-fade-in-up delay-400 z-10 pb-10 md:pb-0">
                 
-                <!-- Desktop Progress Tracker -->
-                <div class="hidden md:flex flex-col glass-dark p-6 sm:p-8 rounded-[2rem] border border-gray-700 shadow-2xl relative overflow-hidden group">
-                    <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-4 flex items-center gap-3">
-                        <span class="w-8 h-px bg-harvard-500"></span>
-                        Current Progress
-                    </h3>
-                    <div class="relative pl-4 space-y-6">
-                        <div class="absolute left-[7px] top-2 bottom-2 w-0.5 bg-gray-800"></div>
-                        <div class="relative flex items-center gap-4">
-                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-harvard-500 border-[3px] border-charcoal-900 shadow-[0_0_10px_rgba(165,28,48,0.5)] z-10 transition-transform hover:scale-125 duration-300"></div>
-                            <p class="text-sm font-semibold text-white">Enrollment Open <span class="block text-[10px] text-gray-500 font-normal uppercase tracking-wider">Present Stage</span></p>
-                        </div>
-                        <div class="relative flex items-center gap-4">
-                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-gray-800 border-[3px] border-charcoal-900 z-10 transition-colors duration-300 hover:bg-gold-500"></div>
-                            <p class="text-sm font-semibold text-gray-500">Registration Ends <span class="block text-[10px] text-gray-700 font-normal uppercase tracking-wider">June 2026</span></p>
-                        </div>
-                        <div class="relative flex items-center gap-4">
-                            <div class="absolute -left-[14px] w-4 h-4 rounded-full bg-gray-800 border-[3px] border-charcoal-900 z-10 transition-colors duration-300 hover:bg-gold-500"></div>
-                            <p class="text-sm font-semibold text-gray-500">Course Commences <span class="block text-[10px] text-gray-700 font-normal uppercase tracking-wider">Summer 2026</span></p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="glass-dark p-6 sm:p-8 rounded-[2rem] border border-gray-700 shadow-2xl relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-gold-400/5 rounded-full blur-[30px] pointer-events-none group-hover:bg-gold-400/10 transition-colors"></div>
                     
@@ -279,8 +256,52 @@
             
         </div>
         
+        <!-- Horizontal Progress Tracker (Desktop) -->
+        <div class="hidden md:flex flex-col max-w-5xl mx-auto w-full mt-16 z-10 animate-fade-in-up delay-400">
+            <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-3">
+                <span class="w-8 h-px bg-harvard-500"></span>
+                Current Progress
+            </h3>
+            <div class="relative flex justify-between items-center bg-charcoal-900/60 backdrop-blur-md px-12 py-8 rounded-[2rem] border border-gray-800 shadow-xl overflow-hidden group hover:border-gray-700 transition-colors duration-500">
+                
+                <div class="absolute top-0 right-0 w-32 h-32 bg-harvard-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-harvard-500/10 transition-colors"></div>
+
+                <!-- Connecting Line -->
+                <div class="absolute top-[40%] left-24 right-24 h-0.5 bg-gray-800 -translate-y-1/2 z-0"></div>
+                <!-- Active connecting line taking up 33% -->
+                <div class="absolute top-[40%] left-24 w-1/3 h-0.5 bg-gradient-to-r from-harvard-500 to-harvard-500/20 -translate-y-1/2 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 flex flex-col items-center gap-4">
+                    <div class="w-6 h-6 rounded-full bg-harvard-500 border-[4px] border-charcoal-900 shadow-[0_0_15px_rgba(165,28,48,0.6)] transition-transform hover:scale-125 duration-300"></div>
+                    <div class="text-center rounded-lg mt-2">
+                        <p class="text-sm font-semibold text-white">Enrollment Open</p>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mt-1">Present Stage</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10 flex flex-col items-center gap-4">
+                    <div class="w-6 h-6 rounded-full bg-gray-800 border-[4px] border-charcoal-900 transition-colors duration-300 hover:bg-gold-500"></div>
+                    <div class="text-center rounded-lg mt-2">
+                        <p class="text-sm font-semibold text-gray-500">Registration Ends</p>
+                        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-wider mt-1">June 2026</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10 flex flex-col items-center gap-4">
+                    <div class="w-6 h-6 rounded-full bg-gray-800 border-[4px] border-charcoal-900 transition-colors duration-300 hover:bg-gold-500"></div>
+                    <div class="text-center rounded-lg mt-2">
+                        <p class="text-sm font-semibold text-gray-500">Course Commences</p>
+                        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-wider mt-1">Summer 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Scroll indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce hidden md:flex">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce hidden lg:flex">
             <span class="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-2">Scroll</span>
             <svg class="w-4 h-4 text-harvard-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
