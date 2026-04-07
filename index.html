@@ -969,13 +969,13 @@
                 currWidth = currCanvas.width = currCanvas.offsetWidth;
                 currHeight = currCanvas.height = Math.max(currCanvas.offsetHeight, 600);
                 
-                const columnCount = Math.floor(currWidth / 120);
+                const columnCount = Math.floor(currWidth / 40);
                 currColumns = [];
                 for(let i = 0; i < columnCount; i++) {
                     currColumns[i] = {
-                        x: i * 120,
+                        x: i * 40,
                         y: Math.random() * currHeight,
-                        speed: Math.random() * 3.0 + 1.5,
+                        speed: Math.random() * 0.4 + 0.2,
                         snippet: pySnippets[Math.floor(Math.random() * pySnippets.length)],
                         opacity: Math.random() * 0.4 + 0.1
                     };
@@ -986,19 +986,19 @@
                 requestAnimationFrame(animateCurrCanvas);
                 currCtx.fillStyle = 'rgba(10, 10, 10, 0.05)';
                 currCtx.fillRect(0, 0, currWidth, currHeight);
-                currCtx.font = '12px "Plus Jakarta Sans"';
+                currCtx.font = '16px "Plus Jakarta Sans"';
                 currCtx.textAlign = 'center';
                 
                 for(let i = 0; i < currColumns.length; i++) {
                     const col = currColumns[i];
                     currCtx.fillStyle = (i % 3 === 0) ? `rgba(198, 161, 91, ${col.opacity})` : `rgba(165, 28, 48, ${col.opacity})`;
-                    currCtx.fillText(col.snippet, col.x + 60, col.y);
+                    currCtx.fillText(col.snippet, col.x + 20, col.y);
                     col.y += col.speed;
                     
                     if(col.y > currHeight && Math.random() > 0.98){
                         col.y = -20;
                         col.snippet = pySnippets[Math.floor(Math.random() * pySnippets.length)];
-                        col.speed = Math.random() * 3.0 + 1.5;
+                        col.speed = Math.random() * 0.4 + 0.2;
                     }
                 }
             }
