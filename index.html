@@ -186,6 +186,66 @@
                 </div>
             </div>
             
+            <!-- Right Stats Content -->
+            <div class="lg:col-span-4 mt-12 lg:mt-16 sm:flex flex-col gap-4 animate-fade-in-up delay-400 z-10">
+                <div class="glass-dark p-6 sm:p-8 rounded-[2rem] border border-gray-700 shadow-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold-400/5 rounded-full blur-[30px] pointer-events-none group-hover:bg-gold-400/10 transition-colors"></div>
+                    
+                    <h3 class="text-gold-400 font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-3">
+                        <span class="w-8 h-px bg-gold-400"></span>
+                        Key Information
+                    </h3>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-harvard-600/20 flex items-center justify-center text-harvard-500 shrink-0 border border-harvard-600/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Registration Till</p>
+                                <p class="text-white text-base font-semibold">05 Jun 2026</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-harvard-600/20 flex items-center justify-center text-harvard-500 shrink-0 border border-harvard-600/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Schedule</p>
+                                <p class="text-white text-base font-semibold">7 PM - 9 PM <span class="text-gray-400 text-xs font-normal ml-1">/ Mon-Fri</span></p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-harvard-600/20 flex items-center justify-center text-harvard-500 shrink-0 border border-harvard-600/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Mode & Language</p>
+                                <p class="text-white text-base font-semibold">Online <span class="text-gray-400 text-xs font-normal ml-1">/ English</span></p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gold-400/20 flex items-center justify-center text-gold-400 shrink-0 border border-gold-400/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Tentative Start</p>
+                                <p class="text-gold-400 text-base font-semibold">Summer 2026</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-harvard-600/20 flex items-center justify-center text-harvard-500 shrink-0 border border-harvard-600/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-none mb-1">Course Label</p>
+                                <p class="text-white text-base font-semibold">SDC</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
         </div>
         
         <!-- Scroll indicator -->
@@ -362,19 +422,39 @@
                     </a>
                 </div>
                 
-                <!-- Quick Stats Badges -->
-                <div class="flex flex-wrap gap-4 md:justify-end">
-                    <div class="glass-dark px-6 py-4 rounded-xl border border-gray-800 flex flex-col items-center min-w-[120px] shadow-lg">
-                        <span class="text-gold-400 text-sm font-bold uppercase tracking-wider mb-1">Duration</span>
-                        <span class="text-2xl font-serif text-white">60 Hrs</span>
+                <!-- Comprehensive Course Info -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:justify-end w-full lg:w-auto mt-8 md:mt-0">
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg border-l-2 border-l-harvard-600">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Course Label</span>
+                        <span class="text-lg font-serif text-white">SDC</span>
                     </div>
-                    <div class="glass-dark px-6 py-4 rounded-xl border border-gray-800 flex flex-col items-center min-w-[120px] shadow-lg">
-                        <span class="text-gold-400 text-sm font-bold uppercase tracking-wider mb-1">Mode</span>
-                        <span class="text-2xl font-serif text-white">Online</span>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg border-l-2 border-l-gold-400">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Registration</span>
+                        <span class="text-lg font-serif text-white tracking-tight">05 Jun 2026</span>
                     </div>
-                    <div class="glass-dark px-6 py-4 rounded-xl border border-gray-800 flex flex-col items-center min-w-[120px] shadow-lg">
-                        <span class="text-gold-400 text-sm font-bold uppercase tracking-wider mb-1">Level</span>
-                        <span class="text-2xl font-serif text-white">Advanced</span>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Timings</span>
+                        <span class="text-lg font-serif text-white tracking-tight">7 PM - 9 PM</span>
+                    </div>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Days</span>
+                        <span class="text-lg font-serif text-white">Mon - Fri</span>
+                    </div>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg border-l-2 border-l-gold-400">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Start Date</span>
+                        <span class="text-lg font-serif text-white">Summer '26</span>
+                    </div>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Mode & Lang</span>
+                        <span class="text-lg font-serif text-white">Online / Eng</span>
+                    </div>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Level</span>
+                        <span class="text-lg font-serif text-white">Advanced</span>
+                    </div>
+                    <div class="glass-dark p-4 rounded-xl border border-gray-800 flex flex-col shadow-lg">
+                        <span class="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-1">Duration</span>
+                        <span class="text-lg font-serif text-white">60 Hrs</span>
                     </div>
                 </div>
             </div>
